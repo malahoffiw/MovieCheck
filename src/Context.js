@@ -6,7 +6,7 @@ const Context = React.createContext(undefined)
 const ContextProvider = ({children}) => {
     const [movies, setMovies] = useState([])
     const [serials, setSerials] = useState([])
-    const [favoriteMovies, setFavoriteMovies] = useState(store.get('favorites'))
+    const [favoriteMovies, setFavoriteMovies] = useState(store.get('favorites') || [])
     const urlMovies = "https://kinopoiskapiunofficial.tech/api/v2.2/films?order=NUM_VOTE&type=FILM&ratingFrom=6&ratingTo=10&yearFrom=2015&yearTo=2022&page=1"
     const urlSerials = "https://kinopoiskapiunofficial.tech/api/v2.2/films?order=NUM_VOTE&type=TV_SERIES&ratingFrom=6&ratingTo=10&yearFrom=2015&yearTo=2022&page=1"
 
