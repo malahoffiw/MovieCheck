@@ -1,60 +1,75 @@
-import React, {useState, useEffect} from "react"
+import React, {useEffect, useState} from "react"
+import store from "store"
 
 const Context = React.createContext(undefined)
 
-function ContextProvider({children}) {
-    const [picsArray, setPicsArray] = useState([])
-    const [cartItems, setCartItems] = useState([])
-    const url = `https://api.kinopoisk.dev/movie?field=rating.kp&search=7-10&field=year&search=2019-2022&field=typeNumber&search=!null&sortField=votes.kp&sortType=-1&token=${process.env.REACT_APP_KINOPOISK_API_TOKEN}`
+const ContextProvider = ({children}) => {
+    const [movies, setMovies] = useState([])
+    const [serials, setSerials] = useState([])
+    const [favoriteMovies, setFavoriteMovies] = useState(store.get('favorites'))
+    const urlMovies = "https://kinopoiskapiunofficial.tech/api/v2.2/films?order=NUM_VOTE&type=FILM&ratingFrom=6&ratingTo=10&yearFrom=2015&yearTo=2022&page=1"
+    const urlSerials = "https://kinopoiskapiunofficial.tech/api/v2.2/films?order=NUM_VOTE&type=TV_SERIES&ratingFrom=6&ratingTo=10&yearFrom=2015&yearTo=2022&page=1"
 
     useEffect(() => {
         const controller = new AbortController()
         const signal = controller.signal
 
-        fetch(url, { signal })
-            .then(res => res.json())
-            .then(data => setPicsArray((data.docs)))
-            .catch(e => {
-                if (e.name !== "AbortError") alert(e.message)
+        Promise.all([
+            fetch(urlMovies, {
+                headers: {
+                    'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_TOKEN,
+                },
+                signal
+            }),
+            fetch(urlSerials, {
+                headers: {
+                    'X-API-KEY': process.env.REACT_APP_KINOPOISK_API_TOKEN,
+                },
+                signal
             })
+        ])
+        .then(([res1, res2]) => Promise.all([res1.json(), res2.json()]))
+        .then(([data1, data2]) => {
+            setMovies(data1.items)
+            setSerials(data2.items)
+        })
+        .catch(e => {
+            if (e.name !== "AbortError") alert(e.message)
+        })
 
         return () => {
             controller.abort()
         }
-    }, [url])
+    }, [])
 
-    // function toggleFavorite(id) {
-    //     setPicsArray(picsArray.map(pic => {
-    //         if (pic.id === id) {
-    //             return {
-    //                 ...pic,
-    //                 isFavorite: !pic.isFavorite
-    //             }
-    //         }
-    //
-    //         return pic
-    //     }))
-    // }
+    useEffect(() => {
+        store.set('favorites', favoriteMovies)
+    }, [favoriteMovies])
 
-    function addCartItem(chosenPic) {
-        setCartItems(prevCart => [
-                ...prevCart,
-                chosenPic
-            ])
+    function addFavoriteMovie(chosenMovie) {
+        setFavoriteMovies(prevFavoriteItems => [
+            chosenMovie,
+            ...prevFavoriteItems,
+        ])
     }
 
-    function removeCartItem(chosenPic) {
-        setCartItems(prevCart => prevCart.filter(item => item.id !== chosenPic.id))
+    function removeFavoriteMovie(chosenMovie) {
+        setFavoriteMovies(prevFavoriteItems => prevFavoriteItems.filter(item => item.kinopoiskId !== chosenMovie.kinopoiskId))
     }
 
-    function clearCart() {
-        setCartItems([])
+    function clearFavorites() {
+        setFavoriteMovies([])
     }
 
     return (
-        <Context.Provider value={
-            {picsArray, cartItems, addCartItem, removeCartItem, clearCart}
-        }>
+        <Context.Provider value={{
+            movies,
+            serials,
+            favoriteMovies,
+            addFavoriteMovie,
+            removeFavoriteMovie,
+            clearFavorites,
+        }}>
             {children}
         </Context.Provider>
     )

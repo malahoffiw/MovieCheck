@@ -1,21 +1,26 @@
-import React from "react"
+import React, { useState } from "react"
 import {Switch, Route} from "react-router-dom"
 
-import Header from "./components/Header"
-import Cart from "./pages/Cart"
-import Items from "./pages/Items"
+import Header from "./components/Header/Header"
+import Movies from "./pages/Movies"
+import Favorites from "./pages/Favorites";
+import Serials from "./pages/Serials";
 
-function App() {
+const App = () => {
+    const [isOpen, setIsOpen] = useState(false)
+
     return (
         <div>
-            <Header />
+            <Header isOpen={isOpen} setIsOpen={setIsOpen}/>
             <Switch>
                 <Route exact path="/">
-                    <Items />
+                    <Movies setIsOpen={setIsOpen}/>
                 </Route>
-
-                <Route path="/cart">
-                    <Cart />
+                <Route path="/serials">
+                    <Serials setIsOpen={setIsOpen}/>
+                </Route>
+                <Route path="/favorites">
+                    <Favorites setIsOpen={setIsOpen}/>
                 </Route>
             </Switch>
         </div>
