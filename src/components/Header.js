@@ -7,7 +7,7 @@ function Header() {
 
     return (
         <header>
-            <Link to="/"><h2>Pic Some</h2></Link>
+            <Link to="/"><h2>Main</h2></Link>
             <Link to="/cart">
                 {
                     cartItems.length > 0

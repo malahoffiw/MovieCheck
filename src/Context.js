@@ -5,27 +5,36 @@ const Context = React.createContext(undefined)
 function ContextProvider({children}) {
     const [picsArray, setPicsArray] = useState([])
     const [cartItems, setCartItems] = useState([])
-    const url = "https://raw.githubusercontent.com/bobziroll/scrimba-react-bootcamp-images/master/images.json"
+    const url = `https://api.kinopoisk.dev/movie?field=rating.kp&search=7-10&field=year&search=2019-2022&field=typeNumber&search=!null&sortField=votes.kp&sortType=-1&token=${process.env.REACT_APP_KINOPOISK_API_TOKEN}`
 
     useEffect(() => {
-        fetch(url)
+        const controller = new AbortController()
+        const signal = controller.signal
+
+        fetch(url, { signal })
             .then(res => res.json())
-            .then(data => setPicsArray((data)))
-            .catch(e => console.log(e.message))
-    }, [])
+            .then(data => setPicsArray((data.docs)))
+            .catch(e => {
+                if (e.name !== "AbortError") alert(e.message)
+            })
 
-    function toggleFavorite(id) {
-        setPicsArray(picsArray.map(pic => {
-            if (pic.id === id) {
-                return {
-                    ...pic,
-                    isFavorite: !pic.isFavorite
-                }
-            }
+        return () => {
+            controller.abort()
+        }
+    }, [url])
 
-            return pic
-        }))
-    }
+    // function toggleFavorite(id) {
+    //     setPicsArray(picsArray.map(pic => {
+    //         if (pic.id === id) {
+    //             return {
+    //                 ...pic,
+    //                 isFavorite: !pic.isFavorite
+    //             }
+    //         }
+    //
+    //         return pic
+    //     }))
+    // }
 
     function addCartItem(chosenPic) {
         setCartItems(prevCart => [
@@ -44,7 +53,7 @@ function ContextProvider({children}) {
 
     return (
         <Context.Provider value={
-            {picsArray, cartItems, toggleFavorite, addCartItem, removeCartItem, clearCart}
+            {picsArray, cartItems, addCartItem, removeCartItem, clearCart}
         }>
             {children}
         </Context.Provider>

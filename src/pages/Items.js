@@ -1,21 +1,20 @@
 import React, {useContext} from "react"
 
-import Image from "../components/Image"
+import ShopItem from "../components/ShopItem"
 import {Context} from "../Context"
-import {getClass} from "../utils/getClass"
 
-function Photos() {
+function Items() {
     const {picsArray} = useContext(Context)
 
     const imageElements = picsArray.map((photo, index) => (
-      <Image key={photo.id} img={photo} favorite={photo.isFavorite} className={getClass(index)}/>
+      <ShopItem key={photo.id} id={photo.id} url={photo.poster.url} />
     ))
 
     return (
-        <main className="photos">
+        <main className="shop-items">
             {imageElements}
         </main>
     )
 }
 
-export default Photos
+export default Items

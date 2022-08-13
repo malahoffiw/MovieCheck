@@ -22,7 +22,7 @@ function Cart() {
 
     return (
         <main className="cart-page">
-            <h1>Check out</h1>
+            <h1 className="cart-page-title">Check out</h1>
             {cartItemElements}
             <p className="total-cost">Total: {totalCost}</p>
             {
