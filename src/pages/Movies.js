@@ -4,14 +4,18 @@ import MovieItem from "../components/MovieItem/MovieItem"
 import {Context} from "../Context"
 
 const Movies = ({setIsOpen}) => {
-    const {movies} = useContext(Context)
+    const {movies, serials, mainPage} = useContext(Context)
 
-    const imageElements = movies.map(movie => (
-      <MovieItem key={movie.kinopoiskId} id={movie.kinopoiskId} url={movie.posterUrl} movie={movie}/>
-    ))
+    const imageElements = mainPage === "movies"
+        ? movies.map(movie => (
+            <MovieItem key={movie.kinopoiskId} id={movie.kinopoiskId} url={movie.posterUrl} movie={movie}/>
+        ))
+        : serials.map(serial => (
+            <MovieItem key={serial.kinopoiskId} id={serial.kinopoiskId} url={serial.posterUrl} movie={serial}/>
+        ))
 
     return (
-        <main className="shop-items" onClick={() => setIsOpen(false)}>
+        <main className="movieItems" onClick={() => setIsOpen(false)}>
             {imageElements}
         </main>
     )

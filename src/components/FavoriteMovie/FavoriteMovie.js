@@ -1,46 +1,53 @@
 import React, {useContext, useState} from "react"
 import {Context} from "../../Context";
+import classes from "./FavoriteMovie.module.scss";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 const FavoriteMovie = ({movie}) => {
     const [hovered, setHovered] = useState(false)
     const {removeFavoriteMovie} = useContext(Context)
+    const windowWidth = useWindowWidth()
 
     const countries = movie.countries.map(country => `${country.country}`).join(', ')
-    const genres = movie.genres.map(genre => `${genre.genre}`).join(', ')
-
+    const genres = movie.genres.map(genre => ` ${genre.genre}`).join(', ')
 
     return (
         <>
-            <div className="favorite-movie-item">
-                <img src={movie.posterUrl} width="100px"  alt="another favorite movie"/>
+            <div className={classes.favoriteMovieItem}>
+                <img src={movie.posterUrl} alt="another favorite movie"/>
 
-                <div className="movie-info">
-                    <p className="name">{movie.nameRu}</p>
-                    <p className="name-countries">{movie.nameOriginal || movie.nameRu} &#183; {countries}</p>
-                    <p className="year-genres">{movie.year} &#183; {genres}</p>
+                <div className={classes.movieInfo}>
+                    <p className={classes.name}>{movie.nameRu}</p>
+                    <p className={classes.altName}>
+                        {movie.nameOriginal || movie.nameRu} &#183; {countries}
+                    </p>
+                    <p className={classes.yearGenres}>
+                        {movie.year} &#183;
+                        {windowWidth > 900 ? genres : genres.split(', ').slice(0, 2).join(', ')}
+                    </p>
                 </div>
 
-                <div className="favorite-movie-btns">
+                <div className={classes.favoriteMovieBtns}>
                     <a
                         href={`https://www.kinopoisk.ru/film/${movie.kinopoiskId}/`}
                         target="_blank"
                         rel="noreferrer"
-                        className="kinopoisk-link-btn"
+                        className={classes.kinopoiskLinkBtn}
                     >
-                        Открыть на Кинопоиске
+                        {windowWidth > 900 && <p>Открыть на Кинопоиске</p>}
+                        <i className="ri-share-forward-line"></i>
                     </a>
                     <button
-                        className="delete-btn"
+                        className={classes.deleteBtn}
                         onMouseEnter={() => setHovered(true)}
                         onMouseLeave={() => setHovered(false)}
                         onClick={() => removeFavoriteMovie(movie)}
                     >
-                        <p>Удалить из избранного</p>
+                        {windowWidth > 900 && <p>Удалить из избранного</p>}
                         <i className={hovered ? "ri-delete-bin-fill" : "ri-delete-bin-line"}></i>
                     </button>
                 </div>
             </div>
-            <hr/>
         </>
     )
 }

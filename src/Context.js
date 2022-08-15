@@ -4,6 +4,7 @@ import store from "store"
 const Context = React.createContext(undefined)
 
 const ContextProvider = ({children}) => {
+    const [mainPage, setMainPage] = useState('movies')
     const [movies, setMovies] = useState([])
     const [serials, setSerials] = useState([])
     const [favoriteMovies, setFavoriteMovies] = useState(store.get('favorites') || [])
@@ -34,7 +35,7 @@ const ContextProvider = ({children}) => {
             setSerials(data2.items)
         })
         .catch(e => {
-            if (e.name !== "AbortError") alert(e.message)
+            if (e.name !== "AbortError") console.log(e.message)
         })
 
         return () => {
@@ -69,6 +70,8 @@ const ContextProvider = ({children}) => {
             addFavoriteMovie,
             removeFavoriteMovie,
             clearFavorites,
+            mainPage,
+            setMainPage
         }}>
             {children}
         </Context.Provider>

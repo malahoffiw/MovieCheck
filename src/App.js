@@ -4,7 +4,8 @@ import {Switch, Route} from "react-router-dom"
 import Header from "./components/Header/Header"
 import Movies from "./pages/Movies"
 import Favorites from "./pages/Favorites";
-import Serials from "./pages/Serials";
+import MoviePage from "./pages/MoviePage";
+import Main from "./pages/Main";
 
 const App = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -14,13 +15,16 @@ const App = () => {
             <Header isOpen={isOpen} setIsOpen={setIsOpen}/>
             <Switch>
                 <Route exact path="/">
+                    <Main setIsOpen={setIsOpen}/>
+                </Route>
+                <Route exact path="/movies">
                     <Movies setIsOpen={setIsOpen}/>
                 </Route>
-                <Route path="/serials">
-                    <Serials setIsOpen={setIsOpen}/>
-                </Route>
-                <Route path="/favorites">
+                <Route exact path="/favorites">
                     <Favorites setIsOpen={setIsOpen}/>
+                </Route>
+                <Route path="/movies/:movieId">
+                    <MoviePage setIsOpen={setIsOpen}/>
                 </Route>
             </Switch>
         </div>

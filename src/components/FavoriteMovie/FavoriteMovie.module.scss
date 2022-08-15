@@ -1,0 +1,133 @@
+@import "src/styles/variables";
+
+.favoriteMovieItem {
+    margin: 20px 0;
+    padding: 0 40px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+
+    @media (max-width: 900px) {
+        flex-direction: column;
+        text-align: center;
+        padding: 0;
+        width: 40vw;
+        height: 65vw;
+        margin: 0;
+    }
+
+    @media (max-width: 600px) {
+        height: min-content;
+        width: 100%;
+    }
+
+    img {
+        border-radius: 5px;
+        width: 100px;
+
+        @media (max-width: 900px) {
+            width: 30vw;
+        }
+        
+        @media (max-width: 600px) {
+            width: 60vw;
+        }
+    }
+
+    .movieInfo {
+        margin: 0 20px;
+        
+        @media (max-width: 900px) {
+            margin-top: 15px;
+
+            .altName {
+                display: none;
+            }
+        }
+
+        .name {
+            font-size: $font-large;
+            margin-bottom: 10px;
+
+            @media (max-width: 900px) and (min-width: 600px) {
+                font-size: $font-regular;
+            }
+        }
+
+        .yearGenres {
+            font-size: $font-small;
+            font-weight: 200;
+        }
+    }
+
+    .favoriteMovieBtns {
+        margin-left: auto;
+        display: flex;
+        gap: 20px;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        user-select: none;
+        font-size: $font-small;
+
+        @media (max-width: 1200px) {
+            flex-direction: column;
+        }
+        
+        @media (max-width: 900px) {
+            width: 100%;
+            flex-direction: row;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .kinopoiskLinkBtn {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: $gray;
+            border: 1px solid;
+            border-radius: 5px;
+            transition: 0.2s ease;
+            min-width: 214px;
+            height: 46px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $light-white;
+            }
+
+            @media (max-width: 900px) {
+                padding: 15px;
+                min-width: 35px;
+                height: 35px;
+            }
+        }
+
+        .deleteBtn {
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            min-width: 214px;
+            height: 46px;
+            font-size: $font-small;
+            color: $gray;
+            gap: 7px;
+            cursor: pointer;
+            border: 1px solid;
+            border-radius: 5px;
+            transition: 0.2s ease;
+
+            &:hover {
+                background-color: $light-white;
+            }
+
+            @media (max-width: 900px) {
+                padding: 15px;
+                min-width: 35px;
+                height: 35px;
+            }
+        }
+    }
+}

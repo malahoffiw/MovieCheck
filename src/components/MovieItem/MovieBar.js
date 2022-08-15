@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import {Context} from "../../Context";
+import classes from "./MovieItem.module.scss";
 
 const MovieBar = ({movie, hovered}) => {
     const {
@@ -11,16 +12,22 @@ const MovieBar = ({movie, hovered}) => {
     function heartIcon() {
         if (favoriteMovies.some(item => item.kinopoiskId === movie.kinopoiskId)) return (
             <div
-                className={`icon-box ${hovered ? "" : "disabled"}`}
-                onClick={() => removeFavoriteMovie(movie)}
+                className={`${classes.iconBox} ${hovered ? "" : classes.disabled}`}
+                onClick={(e) => {
+                    e.stopPropagation()
+                    removeFavoriteMovie(movie)
+                }}
             >
                 <i className="ri-heart-fill"></i>
             </div>
         )
         else return (
             <div
-                className={`icon-box ${hovered ? "" : "disabled"}`}
-                onClick={() => addFavoriteMovie(movie)}
+                className={`${classes.iconBox} ${hovered ? "" : classes.disabled}`}
+                onClick={(e) => {
+                    e.stopPropagation()
+                    addFavoriteMovie(movie)
+                }}
             >
                 <i className="ri-heart-line"></i>
             </div>
@@ -28,8 +35,8 @@ const MovieBar = ({movie, hovered}) => {
     }
 
     return (
-        <div className={`item-bar ${hovered ? "" : "disabled"}`}>
-            <div className="ratings">
+        <div className={`${classes.itemBar} ${hovered ? "" :  classes.disabled}`}>
+            <div className={classes.ratings}>
                 <p> Кинопоиск: <b>{movie.ratingKinopoisk} </b></p>
                 <p> IMDB: <b>{movie.ratingImdb} </b></p>
             </div>

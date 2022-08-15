@@ -9,9 +9,11 @@ const Favorites = ({setIsOpen}) => {
     ))
 
     return (
-        <main className="favorites-page" onClick={() => setIsOpen(false)}>
-            <h1 className="favorites-page-title">Мое избранное</h1>
-            {favoriteMoviesElements}
+        <main className="favoritesPage" onClick={() => setIsOpen(false)}>
+            <h1 className="favoritesPageTitle">Мое избранное</h1>
+            <div className="favoritesPageElements">
+                {favoriteMoviesElements}
+            </div>
         </main>
     );
 };
