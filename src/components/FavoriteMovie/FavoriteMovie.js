@@ -1,4 +1,5 @@
 import React, {useContext, useState} from "react"
+import {Link} from "react-router-dom";
 import {Context} from "../../Context";
 import classes from "./FavoriteMovie.module.scss";
 import useWindowWidth from "../../hooks/useWindowWidth";
@@ -14,11 +15,16 @@ const FavoriteMovie = ({movie}) => {
     return (
         <>
             <div className={classes.favoriteMovieItem}>
-                <img src={movie.posterUrl} alt="another favorite movie"/>
+                <Link
+                    to={`/movies/${movie.kinopoiskId}`}
+                >
+                    <img src={movie.posterUrl} alt="another favorite movie"/>
+                </Link>
+
 
                 <div className={classes.movieInfo}>
                     <p className={classes.name}>{movie.nameRu}</p>
-                    <p className={classes.altName}>
+                    <p>
                         {movie.nameOriginal || movie.nameRu} &#183; {countries}
                     </p>
                     <p className={classes.yearGenres}>
@@ -37,7 +43,7 @@ const FavoriteMovie = ({movie}) => {
                         {windowWidth > 900 && <p>Открыть на Кинопоиске</p>}
                         <i className="ri-share-forward-line"></i>
                     </a>
-                    <button
+                    <div
                         className={classes.deleteBtn}
                         onMouseEnter={() => setHovered(true)}
                         onMouseLeave={() => setHovered(false)}
@@ -45,7 +51,7 @@ const FavoriteMovie = ({movie}) => {
                     >
                         {windowWidth > 900 && <p>Удалить из избранного</p>}
                         <i className={hovered ? "ri-delete-bin-fill" : "ri-delete-bin-line"}></i>
-                    </button>
+                    </div>
                 </div>
             </div>
         </>

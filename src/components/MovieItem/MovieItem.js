@@ -1,7 +1,7 @@
 import React, {useState} from "react"
+import {Link} from "react-router-dom";
 import MovieBar from "./MovieBar";
 import classes from "./MovieItem.module.scss";
-import {Link} from "react-router-dom";
 
 const MovieItem = ({movie}) => {
     const [hovered, setHovered] = useState(false)

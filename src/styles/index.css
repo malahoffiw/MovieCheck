@@ -144,4 +144,14 @@ body {
   }
 }
 
+.moviePage {
+  margin-top: 67px;
+  padding: 20px 0;
+  height: calc(100vh - 67px);
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  overflow-y: scroll;
+}
+
 /*# sourceMappingURL=index.css.map */

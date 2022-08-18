@@ -5,34 +5,12 @@ import classes from "./MovieItem.module.scss";
 const MovieBar = ({movie, hovered}) => {
     const {
         favoriteMovies,
-        addFavoriteMovie,
-        removeFavoriteMovie
+        toggleFavoriteMovie
     } = useContext(Context)
 
-    function heartIcon() {
-        if (favoriteMovies.some(item => item.kinopoiskId === movie.kinopoiskId)) return (
-            <div
-                className={`${classes.iconBox} ${hovered ? "" : classes.disabled}`}
-                onClick={(e) => {
-                    e.stopPropagation()
-                    removeFavoriteMovie(movie)
-                }}
-            >
-                <i className="ri-heart-fill"></i>
-            </div>
-        )
-        else return (
-            <div
-                className={`${classes.iconBox} ${hovered ? "" : classes.disabled}`}
-                onClick={(e) => {
-                    e.stopPropagation()
-                    addFavoriteMovie(movie)
-                }}
-            >
-                <i className="ri-heart-line"></i>
-            </div>
-        )
-    }
+    const heartClassName = favoriteMovies.some(item => item.kinopoiskId === movie.kinopoiskId)
+        ? "ri-heart-fill"
+        : "ri-heart-line"
 
     return (
         <div className={`${classes.itemBar} ${hovered ? "" :  classes.disabled}`}>
@@ -40,8 +18,12 @@ const MovieBar = ({movie, hovered}) => {
                 <p> Кинопоиск: <b>{movie.ratingKinopoisk} </b></p>
                 <p> IMDB: <b>{movie.ratingImdb} </b></p>
             </div>
-
-            {heartIcon()}
+            <div
+                className={`${classes.iconBox} ${hovered ? "" : classes.disabled}`}
+                onClick={() => toggleFavoriteMovie(movie.kinopoiskId, movie.type)}
+            >
+                <i className={heartClassName}></i>
+            </div>
         </div>
     )
 }

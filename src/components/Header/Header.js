@@ -26,7 +26,7 @@ const Header = ({isOpen, setIsOpen}) => {
                             <DropdownMenu setIsOpen={setIsOpen}/>
                         </CSSTransition>
                     </div>
-                    <Link to="/" onClick={() => setIsOpen(false)}><p>Главная</p></Link>
+                    <Link to="/" onClick={() => setIsOpen(false)}><p>MovieCheck</p></Link>
                 </div>
             }
 

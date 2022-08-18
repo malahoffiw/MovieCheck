@@ -15,9 +15,11 @@ const Movies = ({setIsOpen}) => {
         ))
 
     return (
-        <main className="movieItems" onClick={() => setIsOpen(false)}>
-            {imageElements}
-        </main>
+        <>
+            <main className="movieItems" onClick={() => setIsOpen(false)}>
+                {imageElements}
+            </main>
+        </>
     )
 }
 

@@ -87,8 +87,7 @@
             padding: 10px 20px;
             text-decoration: none;
             color: $gray;
-            border: 1px solid;
-            border-radius: 5px;
+            border-bottom: 1px solid;
             transition: 0.2s ease;
             min-width: 214px;
             height: 46px;
@@ -115,8 +114,7 @@
             color: $gray;
             gap: 7px;
             cursor: pointer;
-            border: 1px solid;
-            border-radius: 5px;
+            border-bottom: 1px solid;
             transition: 0.2s ease;
 
             &:hover {
