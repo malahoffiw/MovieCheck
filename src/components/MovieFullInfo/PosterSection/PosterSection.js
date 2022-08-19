@@ -1,5 +1,5 @@
-import React, {useContext, useState} from "react";
-import {Context} from "../../../Context";
+import React, { useContext, useState } from "react";
+import { Context } from "../../../Context";
 import classes from "./PosterSection.module.scss";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 

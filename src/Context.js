@@ -1,18 +1,34 @@
-import React, {useEffect, useState} from "react"
+import React, { useEffect, useState } from "react"
 import store from "store"
-import setContextInfo from "./services/setContextInfo";
+import { useQuery } from "@tanstack/react-query";
+import fetchContextInfo from "./services/fetchContextInfo";
 
 const Context = React.createContext(undefined)
 
 const ContextProvider = ({children}) => {
     const [mainPage, setMainPage] = useState('movies')
-    const [movies, setMovies] = useState([])
-    const [serials, setSerials] = useState([])
+    const [movies, setMovies] = useState(store.get('movies') || [])
+    const [serials, setSerials] = useState(store.get('serials') || [])
     const [favoriteMovies, setFavoriteMovies] = useState(store.get('favorites') || [])
 
+    const { refetch } = useQuery(
+        ['contextData'],
+        () => fetchContextInfo(),
+        { onSuccess: response => {
+                setMovies(response[0].data.items)
+                setSerials(response[1].data.items)
+                store.set('movies', response[0].data.items)
+                store.set('serials', response[1].data.items)
+                store.set('date', new Date().getDate())
+                }, enabled: !store.get('movies'),
+        }
+    )
+
     useEffect(() => {
-        setContextInfo(setMovies, setSerials)
-    }, [])
+        if (new Date().getDate() !== store.get('date')) {
+            refetch()
+        }
+    }, [refetch])
 
     useEffect(() => {
         store.set('favorites', favoriteMovies)

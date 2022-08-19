@@ -10,17 +10,19 @@
 body {
   background-color: #ececec;
   color: #27272b;
-  overflow: hidden;
   font-size: 19px;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
+  background-color: #1e725d;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e725d;
-  border: 2px solid #ececec;
+  background: #ececec;
+  border: 2px solid #1e725d;
   border-radius: 5px;
 }
 
@@ -67,18 +69,29 @@ body {
   transition: transform 0.3s;
 }
 
+.appBody {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.appBody .contentBody {
+  flex: 1;
+}
+
+.mainPage {
+  margin: 67px 0 20px;
+  background-color: green;
+}
+
 .movieItems {
-  margin-top: 67px;
-  height: calc(100vh - 67px);
+  margin: 67px 0 20px;
   width: 100vw;
-  padding: 25px 0;
+  padding: 35px 0;
   display: grid;
   grid-template-columns: repeat(4, 240px);
   grid-auto-rows: 355px;
   gap: 15px;
   justify-content: center;
-  overflow-y: scroll;
-  overflow-x: hidden;
   -moz-user-select: none;
   -khtml-user-select: none;
   user-select: none;
@@ -101,14 +114,12 @@ body {
 }
 
 .favoritesPage {
-  margin-top: 67px;
-  padding: 20px 0;
-  height: calc(100vh - 67px);
+  margin: 67px 0 20px;
+  padding: 30px 0;
   width: 100vw;
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: scroll;
 }
 .favoritesPage .favoritesPageTitle {
   text-align: center;
@@ -137,7 +148,7 @@ body {
     align-items: baseline;
   }
 }
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .favoritesPage .favoritesPageElements {
     display: flex;
     align-items: center;
@@ -145,13 +156,11 @@ body {
 }
 
 .moviePage {
-  margin-top: 67px;
-  padding: 20px 0;
-  height: calc(100vh - 67px);
+  margin: 67px 0 20px;
+  padding: 30px 0;
   width: 100vw;
   display: flex;
   justify-content: center;
-  overflow-y: scroll;
 }
 
 /*# sourceMappingURL=index.css.map */

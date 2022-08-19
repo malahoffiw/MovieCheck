@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
-import {Link} from "react-router-dom";
-import {Context} from "../../../Context";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { Context } from "../../../Context";
 import classes from "./DropdownMenu.module.scss";
 
 const DropdownMenu = ({setIsOpen}) => {

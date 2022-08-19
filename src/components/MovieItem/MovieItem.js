@@ -1,5 +1,5 @@
-import React, {useState} from "react"
-import {Link} from "react-router-dom";
+import React, { useState } from "react"
+import { Link } from "react-router-dom";
 import MovieBar from "./MovieBar";
 import classes from "./MovieItem.module.scss";
 

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import {Context} from "../Context";
+import { Context } from "../Context";
 import FavoriteMovie from "../components/FavoriteMovie/FavoriteMovie";
 
 const Favorites = ({setIsOpen}) => {

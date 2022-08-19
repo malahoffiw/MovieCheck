@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from "@tanstack/react-query";
+import store from "store";
 import classes from "./MovieFullInfo.module.scss";
 import InfoSection from "./InfoSection/InfoSection";
 import DescriptionSection from "./DescriptionSection/DescriptionSection";
@@ -10,14 +11,17 @@ import parseBoxOffice from "../../utils/parseBoxOffice";
 import parseStaff from "../../utils/parseStaff";
 
 const MovieFullInfo = ({movieId}) => {
-    const { isLoading, data: response, error } = useQuery(
+    const [response, setResponse] = useState(store.get(`movie${movieId}`) || [])
+    useQuery(
         ['movieInfoData', movieId],
         () => fetchMovieInfo(movieId),
-        { enabled: !!movieId }
+        { onSuccess: data => {
+                setResponse(data)
+                store.set(`movie${movieId}`, data)
+                }, enabled: !store.get(`movie${movieId}`) }
     )
 
-    // treat in more detail
-    if (isLoading) return ""
+    if (response.length === 0) return ""
 
     return (
         <div className={classes.moviePageBlock}>

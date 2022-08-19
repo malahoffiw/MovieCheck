@@ -12,17 +12,19 @@
 body {
     background-color: $white;
     color: $gray;
-    overflow: hidden;
     font-size: $font-regular;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar {
     width: 10px;
+    background-color: $dark-green;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: $dark-green;
-    border: 2px solid $white;
+    background: $white;
+    border: 2px solid $dark-green;
     border-radius: 5px;
 }
 
@@ -72,11 +74,25 @@ body {
     }
 }
 
+.appBody {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    .contentBody {
+        flex: 1;
+    }
+}
+
+.mainPage {
+    margin: 67px 0 20px;
+    background-color: green;
+}
+
 .movieItems {
-    margin-top: 67px;
-    height: calc(100vh - 67px);
+    margin: 67px 0 20px;
     width: 100vw;
-    padding: 25px 0;
+    padding: 35px 0;
     display: grid;
     grid: {
         template-columns: repeat(4, 240px);
@@ -84,8 +100,6 @@ body {
     }
     gap: 15px;
     justify-content: center;
-    overflow-y: scroll;
-    overflow-x: hidden;
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
@@ -105,14 +119,12 @@ body {
 }
 
 .favoritesPage {
-    margin-top: 67px;
-    padding: 20px 0;
-    height: calc(100vh - 67px);
+    margin: 67px 0 20px;
+    padding: 30px 0;
     width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: scroll;
 
     #{&}Title {
         text-align: center;
@@ -142,7 +154,7 @@ body {
             align-items: baseline;
         }
         
-        @media (max-width: 600px) {
+        @media (max-width: 750px) {
             display: flex;
             align-items: center;
         }
@@ -150,11 +162,9 @@ body {
 }
 
 .moviePage {
-    margin-top: 67px;
-    padding: 20px 0;
-    height: calc(100vh - 67px);
+    margin: 67px 0 20px;
+    padding: 30px 0;
     width: 100vw;
     display: flex;
     justify-content: center;
-    overflow-y: scroll;
 }

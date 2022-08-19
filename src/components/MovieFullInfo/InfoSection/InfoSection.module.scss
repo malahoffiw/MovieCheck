@@ -142,6 +142,13 @@
 
     @media (max-width: 600px) {
         font-size: $font-extra-small;
+        width: 90%;
+
+        .staff {
+            h5 {
+                line-height: 21px;
+            }
+        }
 
         .rating {
             flex-direction: column;

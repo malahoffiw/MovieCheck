@@ -1,12 +1,12 @@
-import React, {useContext, useState} from "react"
-import {Link} from "react-router-dom";
-import {Context} from "../../Context";
+import React, { useContext, useState } from "react"
+import { Link } from "react-router-dom";
+import { Context } from "../../Context";
 import classes from "./FavoriteMovie.module.scss";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 const FavoriteMovie = ({movie}) => {
     const [hovered, setHovered] = useState(false)
-    const {removeFavoriteMovie} = useContext(Context)
+    const {toggleFavoriteMovie} = useContext(Context)
     const windowWidth = useWindowWidth()
 
     const countries = movie.countries.map(country => `${country.country}`).join(', ')
@@ -47,7 +47,7 @@ const FavoriteMovie = ({movie}) => {
                         className={classes.deleteBtn}
                         onMouseEnter={() => setHovered(true)}
                         onMouseLeave={() => setHovered(false)}
-                        onClick={() => removeFavoriteMovie(movie)}
+                        onClick={() => toggleFavoriteMovie(movie.kinopoiskId, movie.type)}
                     >
                         {windowWidth > 900 && <p>Удалить из избранного</p>}
                         <i className={hovered ? "ri-delete-bin-fill" : "ri-delete-bin-line"}></i>

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import {Context} from "../../Context";
+import { Context } from "../../Context";
 import classes from "./MovieItem.module.scss";
 
 const MovieBar = ({movie, hovered}) => {

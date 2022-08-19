@@ -1,7 +1,7 @@
-import React, {useContext} from "react"
+import React, { useContext } from "react"
 
 import MovieItem from "../components/MovieItem/MovieItem"
-import {Context} from "../Context"
+import { Context } from "../Context"
 
 const Movies = ({setIsOpen}) => {
     const {movies, serials, mainPage} = useContext(Context)
