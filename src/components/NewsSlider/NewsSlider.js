@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
-import classes from "./newsSlider.module.scss";
-import SliderItem from "./sliderItem";
+import classes from "./NewsSlider.module.scss";
+import SliderItem from "./SliderItem";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 const NewsSlider = ({ items }) => {

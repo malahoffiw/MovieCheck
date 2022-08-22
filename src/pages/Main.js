@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
-import NewsSlider from "../components/newsSlider/newsSlider";
+import NewsSlider from "../components/NewsSlider/NewsSlider";
 import { Context } from "../Context";
 
 const Main = ({setIsOpen}) => {
