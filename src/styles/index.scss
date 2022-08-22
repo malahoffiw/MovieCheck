@@ -7,6 +7,8 @@
     padding: 0;
     font-family: $font;
     letter-spacing: 0.03em;
+    text-decoration: none;
+
 }
 
 body {
@@ -20,6 +22,10 @@ body {
 ::-webkit-scrollbar {
     width: 10px;
     background-color: $dark-green;
+
+    @media (hover: none) {
+        display: none;
+    }
 }
 
 ::-webkit-scrollbar-thumb {
@@ -85,8 +91,41 @@ body {
 }
 
 .mainPage {
+    font-size: $font-small;
     margin: 67px 0 20px;
-    background-color: green;
+    padding: 25px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+
+    &>div {
+        width: 900px;
+        display: flex;
+        
+        @media (max-width: 950px) {
+            width: 80%;
+        }
+
+        @media (max-width: 600px) {
+            width: 90%;
+            font-size: $font-extra-small;
+        }
+    }
+
+    &Link {
+        color: $gray;
+
+        h2 {
+            padding: 0 10px;
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
 .movieItems {
@@ -119,9 +158,11 @@ body {
 }
 
 .favoritesPage {
-    margin: 67px 0 20px;
+    position: relative;
+    margin: 67px 0 0;
     padding: 30px 0;
     width: 100vw;
+    min-height: calc(100vh - 147px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -133,6 +174,13 @@ body {
         @media (max-width: 900px) {
             font-size: $font-large;
         }
+    }
+
+    .emptyLabel {
+        position: absolute;
+        top: 30%;
+        text-align: center;
+        font-weight: 200;
     }
 
     .favoritesPageElements {

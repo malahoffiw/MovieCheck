@@ -5,6 +5,7 @@
   padding: 0;
   font-family: "Oswald", sans-serif;
   letter-spacing: 0.03em;
+  text-decoration: none;
 }
 
 body {
@@ -18,6 +19,11 @@ body {
 ::-webkit-scrollbar {
   width: 10px;
   background-color: #1e725d;
+}
+@media (hover: none) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 ::-webkit-scrollbar-thumb {
@@ -79,8 +85,39 @@ body {
 }
 
 .mainPage {
+  font-size: 16px;
   margin: 67px 0 20px;
-  background-color: green;
+  padding: 25px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+.mainPage > div {
+  width: 900px;
+  display: flex;
+}
+@media (max-width: 950px) {
+  .mainPage > div {
+    width: 80%;
+  }
+}
+@media (max-width: 600px) {
+  .mainPage > div {
+    width: 90%;
+    font-size: 14px;
+  }
+}
+.mainPageLink {
+  color: #27272b;
+}
+.mainPageLink h2 {
+  padding: 0 10px;
+}
+.mainPageLink:hover {
+  text-decoration: underline;
 }
 
 .movieItems {
@@ -114,9 +151,11 @@ body {
 }
 
 .favoritesPage {
-  margin: 67px 0 20px;
+  position: relative;
+  margin: 67px 0 0;
   padding: 30px 0;
   width: 100vw;
+  min-height: calc(100vh - 147px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -129,6 +168,12 @@ body {
   .favoritesPage .favoritesPageTitle {
     font-size: 25px;
   }
+}
+.favoritesPage .emptyLabel {
+  position: absolute;
+  top: 30%;
+  text-align: center;
+  font-weight: 200;
 }
 .favoritesPage .favoritesPageElements {
   margin-top: 20px;

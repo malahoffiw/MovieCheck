@@ -24,6 +24,7 @@ const ContextProvider = ({children}) => {
         }
     )
 
+    // comment in dev mode
     useEffect(() => {
         if (new Date().getDate() !== store.get('date')) {
             refetch()

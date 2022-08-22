@@ -15,8 +15,8 @@ const MovieBar = ({movie, hovered}) => {
     return (
         <div className={`${classes.itemBar} ${hovered ? "" :  classes.disabled}`}>
             <div className={classes.ratings}>
-                <p> Кинопоиск: <b>{movie.ratingKinopoisk} </b></p>
-                <p> IMDB: <b>{movie.ratingImdb} </b></p>
+                <p> Кинопоиск: <b>{movie.ratingKinopoisk || "-"} </b></p>
+                <p> IMDB: <b>{movie.ratingImdb || "-"} </b></p>
             </div>
             <div
                 className={`${classes.iconBox} ${hovered ? "" : classes.disabled}`}

@@ -12,7 +12,9 @@ const Favorites = ({setIsOpen}) => {
         <main className="favoritesPage" onClick={() => setIsOpen(false)}>
             <h1 className="favoritesPageTitle">Мое избранное</h1>
             <div className="favoritesPageElements">
-                {favoriteMoviesElements}
+                {favoriteMovies.length > 0 ? favoriteMoviesElements : (
+                    <p className="emptyLabel">Здесь пока ничего нет...</p>
+                )}
             </div>
         </main>
     );
