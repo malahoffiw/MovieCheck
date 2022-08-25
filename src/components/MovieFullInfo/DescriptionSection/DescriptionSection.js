@@ -52,14 +52,17 @@ const DescriptionSection = ({  movieInfo, movieFacts }) => {
                 >
                     <p>Описание</p>
                 </div>
-                <div
-                    className={activeSection === 'facts' ? classes.active : ""}
-                    onClick={() => setActiveSection('facts')}
-                >
-                    <p>Интересные факты</p>
-                </div>
                 {
-                    windowWidth > 600 &&
+                    facts.length > 0 &&
+                    <div
+                        className={activeSection === 'facts' ? classes.active : ""}
+                        onClick={() => setActiveSection('facts')}
+                    >
+                        <p>Интересные факты</p>
+                    </div>
+                }
+                {
+                    windowWidth > 600 && facts.length > 0 &&
                     <div
                         className={`${classes.spoilerToggler} ${activeSection === 'facts' ? classes.active : ""}`}
                         onClick={() => {
@@ -72,7 +75,7 @@ const DescriptionSection = ({  movieInfo, movieFacts }) => {
             </div>
             <hr/>
             {
-                windowWidth <= 600 &&
+                windowWidth <= 600 && facts.length > 0 &&
                 <div
                     className={`${classes.spoilerToggler} ${activeSection === 'facts' ? classes.active : ""}`}
                     onClick={() => {

@@ -9,7 +9,6 @@ const FavoriteMovie = ({movie}) => {
     const {toggleFavoriteMovie} = useContext(Context)
     const windowWidth = useWindowWidth()
 
-    const countries = movie.countries.map(country => `${country.country}`).join(', ')
     const genres = movie.genres.map(genre => ` ${genre.genre}`).join(', ')
 
     return (
@@ -24,9 +23,6 @@ const FavoriteMovie = ({movie}) => {
 
                 <div className={classes.movieInfo}>
                     <p className={classes.name}>{movie.nameRu}</p>
-                    <p>
-                        {movie.nameOriginal || movie.nameRu} &#183; {countries}
-                    </p>
                     <p className={classes.yearGenres}>
                         {movie.year} &#183;
                         {windowWidth > 900 ? genres : genres.split(', ').slice(0, 2).join(', ')}
@@ -47,7 +43,7 @@ const FavoriteMovie = ({movie}) => {
                         className={classes.deleteBtn}
                         onMouseEnter={() => setHovered(true)}
                         onMouseLeave={() => setHovered(false)}
-                        onClick={() => toggleFavoriteMovie(movie.kinopoiskId, movie.type)}
+                        onClick={() => toggleFavoriteMovie(movie)}
                     >
                         {windowWidth > 900 && <p>Удалить из избранного</p>}
                         <i className={hovered ? "ri-delete-bin-fill" : "ri-delete-bin-line"}></i>

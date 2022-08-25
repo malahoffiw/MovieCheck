@@ -20,7 +20,7 @@ const MovieBar = ({movie, hovered}) => {
             </div>
             <div
                 className={`${classes.iconBox} ${hovered ? "" : classes.disabled}`}
-                onClick={() => toggleFavoriteMovie(movie.kinopoiskId, movie.type)}
+                onClick={() => toggleFavoriteMovie(movie)}
             >
                 <i className={heartClassName}></i>
             </div>

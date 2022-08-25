@@ -104,7 +104,7 @@ body {
     &>div {
         width: 900px;
         display: flex;
-        
+
         @media (max-width: 950px) {
             width: 80%;
         }
@@ -128,34 +128,73 @@ body {
     }
 }
 
-.movieItems {
-    margin: 67px 0 20px;
-    width: 100vw;
+.moviesPage {
+    margin: 67px 0 10px;
     padding: 35px 0;
-    display: grid;
-    grid: {
-        template-columns: repeat(4, 240px);
-        auto-rows: 355px;
-    }
-    gap: 15px;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     -moz-user-select: none;
     -khtml-user-select: none;
     user-select: none;
 
-    @media (max-width: 1150px) {
-        grid-template-columns: repeat(3, 240px);
+    &>h1 {
+        font-size: $font-large;
+
+        @media (max-width: 600px) {
+            font-size: $font-regular;
+        }
     }
-    
-    @media (max-width: 850px) {
-        grid-template-columns: repeat(2, 240px);
+
+    .movieItems {
+        width: 100vw;
+        padding: 35px 0;
+        display: grid;
+        grid: {
+            template-columns: repeat(4, 240px);
+            auto-rows: 355px;
+        }
+        gap: 15px;
+        justify-content: center;
+
+        @media (max-width: 1150px) {
+            grid-template-columns: repeat(3, 240px);
+        }
+
+        @media (max-width: 850px) {
+            grid-template-columns: repeat(2, 240px);
+        }
+
+        @media (max-width: 600px) {
+            grid-template-columns: repeat(2, 40vw);
+            grid-auto-rows: 60vw;
+        }
     }
-    
-    @media (max-width: 600px) {
-        grid-template-columns: repeat(2, 40vw);
-        grid-auto-rows: 60vw;
+
+    .nextPage {
+        text-align: center;
+        margin-bottom: 20px;
+        min-width: 200px;
+        height: 40px;
+        font-size: $font-small;
+        color: $gray;
+        cursor: pointer;
+        border-bottom: 1px solid;
+        transition: 0.2s ease;
+
+        &:hover {
+            -webkit-box-shadow: 0 10px 10px -10px rgba(21,6,5,1);
+            -moz-box-shadow: 0 10px 10px -10px rgba(21,6,5,1);
+            box-shadow: 0 10px 10px -10px rgba(21,6,5,1);
+        }
+
+        @media (max-width: 600px) {
+            font-size: $font-extra-small;
+        }
     }
+
 }
+
 
 .favoritesPage {
     position: relative;
@@ -170,7 +209,7 @@ body {
     #{&}Title {
         text-align: center;
         margin-bottom: 20px;
-        
+
         @media (max-width: 900px) {
             font-size: $font-large;
         }
@@ -201,7 +240,7 @@ body {
             justify-content: center;
             align-items: baseline;
         }
-        
+
         @media (max-width: 750px) {
             display: flex;
             align-items: center;
@@ -215,4 +254,23 @@ body {
     width: 100vw;
     display: flex;
     justify-content: center;
+}
+
+.loader {
+    margin: 2px 0 21px;
+    height: 36px;
+    width: 36px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='36' height='36'%3E%3Cpath fill='none' d='M0 0h24v24H0z'/%3E%3Cpath d='M12 3a9 9 0 0 1 9 9h-2a7 7 0 0 0-7-7V3z'/%3E%3C/svg%3E");
+    -webkit-animation: loading 1s linear infinite;
+    -o-animation: loading 1s linear infinite;
+    animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0turn);
+    }
+    100% {
+        transform: rotate(1turn);
+    }
 }

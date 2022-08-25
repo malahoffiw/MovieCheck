@@ -1,7 +1,6 @@
 @import "src/styles/variables";
 
 .searchBar {
-    padding: 0 15px;
     background-color: $white;
     color: $gray;
     border-radius: 5px;
@@ -22,7 +21,16 @@
         }
     }
 
+    .searchIcon {
+        margin-left: 15px;
+
+        &Closed {
+            margin: 0 15px;
+        }
+    }
+
     .cancelIcon {
+        margin-right: 15px;
         border-radius: 5px;
 
         &:hover {
@@ -32,3 +40,26 @@
     }
 }
 
+.resultsList {
+    position: absolute;
+    background-color: $dark-green;
+    top: 67px;
+    width: 300px;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-weight: 200;
+    font-size: $font-small;
+    -webkit-box-shadow: 0 2px 15px -3px rgba(21,6,5,1);
+    -moz-box-shadow: 0 2px 15px -3px rgba(21,6,5,1);
+    box-shadow: 0 2px 15px -3px rgba(21,6,5,1);
+
+    #{&}Item {
+        padding: 5px 10px;
+        color: $white;
+    }
+
+    @media (max-width: 600px) {
+        width: 100%;
+    }
+}

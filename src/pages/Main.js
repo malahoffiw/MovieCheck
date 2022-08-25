@@ -6,7 +6,6 @@ import { Context } from "../Context";
 const Main = ({setIsOpen}) => {
     const { movies, serials, favoriteMovies, setMainPage } = useContext(Context)
 
-
     return (
         <main className="mainPage" onClick={() => setIsOpen(false)}>
             <div>
@@ -21,7 +20,11 @@ const Main = ({setIsOpen}) => {
                     <h2>Новые фильмы</h2>
                 </Link>
             </div>
-            <NewsSlider items={movies}/>
+            {
+                movies.length > 0
+                    ? <NewsSlider items={movies}/>
+                    : <span className="loader"></span>
+            }
             <div>
                 <Link
                     to="/movies"
@@ -34,7 +37,11 @@ const Main = ({setIsOpen}) => {
                     <h2>Новые сериалы</h2>
                 </Link>
             </div>
-            <NewsSlider items={serials} />
+            {
+                serials.length > 0
+                    ? <NewsSlider items={serials}/>
+                    : <span className="loader"></span>
+            }
             <div>
                 <Link
                     to="/favorites"

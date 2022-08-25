@@ -10,17 +10,22 @@ const ContextProvider = ({children}) => {
     const [movies, setMovies] = useState(store.get('movies') || [])
     const [serials, setSerials] = useState(store.get('serials') || [])
     const [favoriteMovies, setFavoriteMovies] = useState(store.get('favorites') || [])
+    const [totalPages, setTotalPages] = useState(store.get('totalPages') || 0)
 
     const { refetch } = useQuery(
         ['contextData'],
         () => fetchContextInfo(),
         { onSuccess: response => {
+                setTotalPages(Math.ceil(response[0].data.total / 20))
+                store.set('totalPages', Math.ceil(response[0].data.total / 20))
+
                 setMovies(response[0].data.items)
                 setSerials(response[1].data.items)
                 store.set('movies', response[0].data.items)
                 store.set('serials', response[1].data.items)
                 store.set('date', new Date().getDate())
-                }, enabled: !store.get('movies'),
+                },
+                enabled: !store.get('movies') || !store.get('serials'),
         }
     )
 
@@ -35,29 +40,15 @@ const ContextProvider = ({children}) => {
         store.set('favorites', favoriteMovies)
     }, [favoriteMovies])
 
-    function addFavoriteMovie(chosenMovie) {
-        setFavoriteMovies(prevFavoriteItems => [
-            chosenMovie,
-            ...prevFavoriteItems,
-        ])
-    }
-
-    function removeFavoriteMovie(chosenMovie) {
-        setFavoriteMovies(prevFavoriteItems => prevFavoriteItems.filter(item => item.kinopoiskId !== chosenMovie.kinopoiskId))
-    }
-
-    function toggleFavoriteMovie(id, type) {
-        let chosenMovie
-        if (type === "FILM") {
-            chosenMovie = movies.find(movie => movie.kinopoiskId === id)
+    function toggleFavoriteMovie(chosenMovie) {
+        if (favoriteMovies.find(movie => movie.kinopoiskId === chosenMovie.kinopoiskId)) {
+            setFavoriteMovies(prevFavoriteItems => prevFavoriteItems
+                .filter(item => item.kinopoiskId !== chosenMovie.kinopoiskId))
         } else {
-            chosenMovie = serials.find(movie => movie.kinopoiskId === id)
-        }
-
-        if (favoriteMovies.find(movie => movie.kinopoiskId === id)) {
-            removeFavoriteMovie(chosenMovie)
-        } else {
-            addFavoriteMovie(chosenMovie)
+            setFavoriteMovies(prevFavoriteItems => [
+                chosenMovie,
+                ...prevFavoriteItems,
+            ])
         }
     }
 
@@ -65,10 +56,11 @@ const ContextProvider = ({children}) => {
         <Context.Provider value={{
             movies,
             serials,
+            totalPages,
             favoriteMovies,
             toggleFavoriteMovie,
             mainPage,
-            setMainPage
+            setMainPage,
         }}>
             {children}
         </Context.Provider>

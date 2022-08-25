@@ -4,9 +4,9 @@ import classes from "./PosterSection.module.scss";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 
 const PosterSection = ({movieInfo}) => {
-    const windowWidth = useWindowWidth()
-    const [hoveredLink, setHoveredLink] = useState(false)
     const { toggleFavoriteMovie, favoriteMovies } = useContext(Context)
+    const [hoveredLink, setHoveredLink] = useState(false)
+    const windowWidth = useWindowWidth()
     const heartClassName = favoriteMovies.some(item => item.kinopoiskId === movieInfo.kinopoiskId)
         ? "ri-heart-fill"
         : "ri-heart-line"
@@ -27,7 +27,7 @@ const PosterSection = ({movieInfo}) => {
             </a>
             <div
                 className={classes.btn}
-                onClick={() => toggleFavoriteMovie(movieInfo.kinopoiskId, movieInfo.type)}
+                onClick={() => toggleFavoriteMovie(movieInfo)}
             >
                 <p>{windowWidth > 600 && "Избранное"}</p>
                 <i className={heartClassName}></i>

@@ -9,9 +9,14 @@ const InfoSection = ({ movieInfo, movieStaff, moviePremiere, movieBoxOffice }) =
     const imdbVotes = movieInfo.ratingImdbVoteCount + ' ' + getNoun(movieInfo.ratingImdbVoteCount, votesNouns)
     const countries = movieInfo.countries.map(country => `${country.country}`).join(', ')
     const genres = movieInfo.genres.map(genre => ` ${genre.genre}`).slice(0, 3).join(', ')
-    const ageLimit = movieInfo.ratingAgeLimits.replace(/\D*(\d+)/, '$1+')
-    const length = `${movieInfo.filmLength} мин. / ${toHoursAndMinutes(movieInfo.filmLength)}`
     const actors = movieStaff.actors.map(actor => <p key={actor.name}>{actor.name}</p>)
+
+    const length = movieInfo.filmLength
+        ? `${movieInfo.filmLength} мин. / ${toHoursAndMinutes(movieInfo.filmLength)}`
+        : "-"
+    const ageLimit = movieInfo.ratingAgeLimits
+        ? movieInfo.ratingAgeLimits.replace(/\D*(\d+)/, '$1+')
+        : "-"
 
     return (
         <div className={classes.info}>
@@ -69,7 +74,7 @@ const InfoSection = ({ movieInfo, movieStaff, moviePremiere, movieBoxOffice }) =
                 </>
                 <>
                     <p className={classes.fullInfoKey}>Возраст</p>
-                    <p>{movieInfo.ratingAgeLimits ? ageLimit : "-"}</p>
+                    <p>{ageLimit}</p>
                 </>
                 <>
                     <p className={classes.fullInfoKey}>Рейтинг MPAA</p>
@@ -77,7 +82,7 @@ const InfoSection = ({ movieInfo, movieStaff, moviePremiere, movieBoxOffice }) =
                 </>
                 <>
                     <p className={classes.fullInfoKey}>Длительность</p>
-                    <p>{movieInfo.filmLength ? length : "-"}</p>
+                    <p>{length}</p>
                 </>
             </div>
             <div className={classes.staff}>
