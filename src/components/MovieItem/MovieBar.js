@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Context } from "../../Context";
 import classes from "./MovieItem.module.scss";
 
-const MovieBar = ({movie, hovered}) => {
+const MovieBar = ({movie, isHovered}) => {
     const {
         favoriteMovies,
         toggleFavoriteMovie
@@ -13,13 +13,13 @@ const MovieBar = ({movie, hovered}) => {
         : "ri-heart-line"
 
     return (
-        <div className={`${classes.itemBar} ${hovered ? "" :  classes.disabled}`}>
+        <div className={`${classes.itemBar} ${isHovered ? "" :  classes.disabled}`}>
             <div className={classes.ratings}>
                 <p> Кинопоиск: <b>{movie.ratingKinopoisk || "-"} </b></p>
                 <p> IMDB: <b>{movie.ratingImdb || "-"} </b></p>
             </div>
             <div
-                className={`${classes.iconBox} ${hovered ? "" : classes.disabled}`}
+                className={`${classes.iconBox} ${isHovered ? "" : classes.disabled}`}
                 onClick={() => toggleFavoriteMovie(movie)}
             >
                 <i className={heartClassName}></i>

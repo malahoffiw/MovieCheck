@@ -5,7 +5,7 @@ import useWindowWidth from "../../../hooks/useWindowWidth";
 
 const PosterSection = ({movieInfo}) => {
     const { toggleFavoriteMovie, favoriteMovies } = useContext(Context)
-    const [hoveredLink, setHoveredLink] = useState(false)
+    const [isHoveredLink, setIsHoveredLink] = useState(false)
     const windowWidth = useWindowWidth()
     const heartClassName = favoriteMovies.some(item => item.kinopoiskId === movieInfo.kinopoiskId)
         ? "ri-heart-fill"
@@ -19,11 +19,11 @@ const PosterSection = ({movieInfo}) => {
                 target="_blank"
                 rel="noreferrer"
                 className={classes.btn}
-                onMouseEnter={() => setHoveredLink(true)}
-                onMouseLeave={() => setHoveredLink(false)}
+                onMouseEnter={() => setIsHoveredLink(true)}
+                onMouseLeave={() => setIsHoveredLink(false)}
             >
                 <p>{windowWidth > 600 && "Кинопоиск"}</p>
-                <i className={hoveredLink ? "ri-share-forward-fill" : "ri-share-forward-line"}></i>
+                <i className={isHoveredLink ? "ri-share-forward-fill" : "ri-share-forward-line"}></i>
             </a>
             <div
                 className={classes.btn}

@@ -5,7 +5,7 @@ import classes from "./FavoriteMovie.module.scss";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 const FavoriteMovie = ({movie}) => {
-    const [hovered, setHovered] = useState(false)
+    const [isHovered, setIsHovered] = useState(false)
     const {toggleFavoriteMovie} = useContext(Context)
     const windowWidth = useWindowWidth()
 
@@ -41,12 +41,12 @@ const FavoriteMovie = ({movie}) => {
                     </a>
                     <div
                         className={classes.deleteBtn}
-                        onMouseEnter={() => setHovered(true)}
-                        onMouseLeave={() => setHovered(false)}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
                         onClick={() => toggleFavoriteMovie(movie)}
                     >
                         {windowWidth > 900 && <p>Удалить из избранного</p>}
-                        <i className={hovered ? "ri-delete-bin-fill" : "ri-delete-bin-line"}></i>
+                        <i className={isHovered ? "ri-delete-bin-fill" : "ri-delete-bin-line"}></i>
                     </div>
                 </div>
             </div>

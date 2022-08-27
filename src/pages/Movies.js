@@ -11,13 +11,13 @@ const Movies = ({setIsOpen}) => {
         allMovies,
         currentPageMovies,
         nextPageMovies,
-        loadingMovies
+        isLoadingMovies
     ] = usePagination(movies, "FILM")
     const [
         allSerials,
         currentPageSerials,
         nextPageSerials,
-        loadingSerials
+        isLoadingSerials
     ] = usePagination(serials, "TV_SERIES")
 
     const imageElements = mainPage === "movies"
@@ -35,12 +35,12 @@ const Movies = ({setIsOpen}) => {
                 {imageElements}
             </main>
             {
-                (loadingMovies || loadingSerials) && (
+                (isLoadingMovies || isLoadingSerials) && (
                     <div className="loader"></div>
                 )
             }
             {
-                mainPage === "movies" && currentPageMovies < totalPages && !(loadingMovies || loadingSerials) &&
+                mainPage === "movies" && currentPageMovies < totalPages && !(isLoadingMovies || isLoadingSerials) &&
                 <div
                     className="nextPage"
                     onClick={nextPageMovies}
@@ -49,7 +49,7 @@ const Movies = ({setIsOpen}) => {
                 </div>
             }
             {
-                mainPage === "serials" && currentPageSerials < totalPages && !(loadingMovies || loadingSerials) &&
+                mainPage === "serials" && currentPageSerials < totalPages && !(isLoadingMovies || isLoadingSerials) &&
                 <div
                     className="nextPage"
                     onClick={nextPageSerials}

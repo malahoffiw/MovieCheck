@@ -12,7 +12,7 @@ import parseStaff from "../../utils/parseStaff";
 
 const MovieFullInfo = ({movieId}) => {
     const [response, setResponse] = useState(store.get(`movie${movieId}`) || [])
-    const { isLoading } = useQuery(
+    const { isFetching } = useQuery(
         ['movieInfoData', movieId],
         () => fetchMovieInfo(movieId),
         { onSuccess: data => {
@@ -21,7 +21,7 @@ const MovieFullInfo = ({movieId}) => {
                 }, enabled: !store.get(`movie${movieId}`) }
     )
 
-    if (isLoading) return (
+    if (isFetching) return (
         <div className={classes.loader}></div>
     )
 

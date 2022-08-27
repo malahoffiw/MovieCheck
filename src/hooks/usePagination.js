@@ -4,14 +4,14 @@ import fetchPage from "../services/fetchPage";
 const UsePagination = (items, contentType) => {
     const [allItems, setAllItems] = useState(items)
     const [currentPage, setCurrentPage] = useState(1)
-    const [loading, setLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
         if (currentPage > 1) {
-            setLoading(true)
+            setIsLoading(true)
             fetchPage(currentPage, contentType)
                 .then(response => {
-                    setLoading(false)
+                    setIsLoading(false)
                     setAllItems(prevItems => [...prevItems, ...response.data.items])
                 })
 
@@ -22,7 +22,7 @@ const UsePagination = (items, contentType) => {
         setCurrentPage(prevPage => prevPage + 1)
     }
 
-    return [allItems, currentPage, nextPage, loading]
+    return [allItems, currentPage, nextPage, isLoading]
 };
 
 export default UsePagination;
