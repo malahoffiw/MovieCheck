@@ -6,7 +6,8 @@ const SliderItem = ({ data }) => {
     return (
         <Link
             to={`/movies/${data.kinopoiskId}`}
-            className={classes.sliderLineItem}>
+            className={classes.sliderLineItem}
+        >
             <img src={data.posterUrl} alt="movie poster"/>
             <div className={classes.rating}>
                 <p>{data.ratingKinopoisk}</p>

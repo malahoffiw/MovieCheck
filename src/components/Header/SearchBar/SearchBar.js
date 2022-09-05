@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classes from "./SearchBar.module.scss";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import useDebounce from "../../../hooks/useDebounce";
@@ -6,6 +6,7 @@ import fetchSearchResults from "../../../services/fetchSearchResults";
 import SearchResults from "./SearchResults";
 
 const SearchBar = ({setIsSearchBarOpen, isSearchBarOpen}) => {
+    const inputRef = useRef(null)
     const [query, setQuery] = useState('')
     const [searchResults, setSearchResults] = useState([])
     const windowWidth = useWindowWidth()
@@ -19,6 +20,12 @@ const SearchBar = ({setIsSearchBarOpen, isSearchBarOpen}) => {
             setSearchResults([])
         }
     }, [debouncedQuery])
+
+    useEffect(() => {
+        if (isSearchBarOpen === true && windowWidth <= 600) {
+            inputRef.current.focus()
+        }
+    }, [windowWidth, isSearchBarOpen])
 
     function searchIconClick() {
         if (windowWidth <= 600) {
@@ -37,6 +44,7 @@ const SearchBar = ({setIsSearchBarOpen, isSearchBarOpen}) => {
             <div className={classes.searchBar}>
                 <i className={`ri-search-2-fill ${classes.searchIcon}`}></i>
                 <input
+                    ref={inputRef}
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
